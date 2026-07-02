@@ -35,6 +35,7 @@ return {
             "sql",
             "vim",
             "vimdoc",
+            "php",
         }
 
         -- Filetypes that should activate treesitter
