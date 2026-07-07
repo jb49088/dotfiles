@@ -36,11 +36,11 @@ return {
             "vim",
             "vimdoc",
             "php",
+            "powershell",
         }
 
-        -- Filetypes that should activate treesitter
-        -- sh filetype uses bash parser, so include it here but not in parsers
-        local filetypes = vim.list_extend(vim.deepcopy(parsers), { "sh" })
+        -- Filetype names that differ from their parser name need to be added explicitly
+        local filetypes = vim.list_extend(vim.deepcopy(parsers), { "sh", "ps1" })
 
         require("nvim-treesitter").install(parsers)
 
