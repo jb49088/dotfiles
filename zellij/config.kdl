@@ -125,11 +125,13 @@ keybinds clear-defaults=true {
         bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
     }
     search {
-        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
         bind "n" { Search "down"; }
-        bind "o" { SearchToggleOption "WholeWord"; }
-        bind "p" { Search "up"; }
+        bind "N" { Search "up"; }
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
         bind "w" { SearchToggleOption "Wrap"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
     }
     session {
         bind "a" {
@@ -228,14 +230,14 @@ keybinds clear-defaults=true {
         bind "right" { PageScrollDown; }
         bind "Ctrl b" { PageScrollUp; }
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
-        bind "d" { HalfPageScrollDown; }
         bind "Ctrl f" { PageScrollDown; }
         bind "h" { PageScrollUp; }
         bind "j" { ScrollDown; }
         bind "k" { ScrollUp; }
         bind "l" { PageScrollDown; }
         bind "Ctrl s" { SwitchToMode "normal"; }
-        bind "u" { HalfPageScrollUp; }
+        bind "Ctrl d" { HalfPageScrollDown; }
+        bind "Ctrl u" { HalfPageScrollUp; }
     }
     entersearch {
         bind "Ctrl c" { SwitchToMode "scroll"; }
