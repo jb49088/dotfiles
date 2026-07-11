@@ -104,6 +104,9 @@ return {
             dprint = {
                 filetypes = { "markdown" },
             },
+            powershell_es = {
+                settings = { powershell = { codeFormatting = { Preset = "OTBS" } } },
+            },
         }
 
         for server_name, config in pairs(servers) do
