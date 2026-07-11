@@ -125,8 +125,6 @@ keybinds clear-defaults=true {
         bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
     }
     search {
-        bind "d" { HalfPageScrollDown; }
-        bind "u" { HalfPageScrollUp; }
         bind "n" { Search "down"; }
         bind "N" { Search "up"; }
         bind "c" { SearchToggleOption "CaseSensitivity"; }
