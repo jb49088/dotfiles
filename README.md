@@ -11,12 +11,12 @@ Personal dotfiles and configuration management for my linux machines
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 Lua                             58            626            588           4034
-TOML                             7            110            321            334
+TOML                             7            110            322            333
 JSON                             3              0              0            249
-Markdown                         2              9              4            150
+Markdown                         2              9              4            149
 Bourne Shell                     1              0              0             22
 -------------------------------------------------------------------------------
-SUM:                            71            745            913           4789
+SUM:                            71            745            914           4787
 -------------------------------------------------------------------------------
 ```
 <!-- CODE_STATISTICS_END -->
