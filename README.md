@@ -128,14 +128,13 @@ dotfiles
 ├── ssh
 │   └── config
 ├── yazi
-│   ├── theme.toml
-│   └── yazi.toml
+│   └── theme.toml
 ├── zellij
 │   ├── config.kdl
 │   └── themes
 │       └── astrodark.kdl
 └── zsh
 
-31 directories, 78 files
+31 directories, 77 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
