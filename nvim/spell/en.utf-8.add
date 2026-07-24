@@ -317,3 +317,8 @@ LDAPS
 Wildcard
 preauthentication
 wildcard
+Smb
+Dns
+cmdlets
+Snapin
+inbetween
