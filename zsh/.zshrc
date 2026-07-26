@@ -117,16 +117,6 @@ alias personal='cd $HOME/vault/personal'
 alias professional='cd $HOME/vault/professional'
 alias pentesting='cd $HOME/vault/pentesting'
 
-# ==================================== BACKUP ====================================
-
-if [[ $HOST == "wsl" ]]; then
-    backupall() {
-        backup \
-        && ssh pi "cd \$HOME/bash/backup && git pull origin master && bash backup" \
-        && ssh kali "cd \$HOME/bash/backup && git pull origin master && bash backup"
-    }
-fi
-
 # ===================================== VPN ======================================
 
 # Assumes single .conf in /etc/wireguard/ and uses its name for wg-quick
