@@ -2,8 +2,6 @@
 -- =                                HEIRLINE.NVIM                                 =
 -- ================================================================================
 
-local path = require("custom.extensions.heirline_path")
-
 return {
     "rebelot/heirline.nvim",
     -- enabled = false,
@@ -27,6 +25,111 @@ return {
             }
         end
 
+        --- Get icon using mini.icons
+        local function get_icon(filename, filetype)
+            local ok, mini_icons = pcall(require, "mini.icons")
+            if not ok then
+                return nil, nil
+            end
+
+            local icon, hl, is_default
+
+            if type(filename) == "string" and filename ~= "" then
+                icon, hl, is_default = mini_icons.get("file", filename)
+                if not is_default then
+                    return icon, hl
+                end
+            end
+
+            if filetype and type(filetype) == "string" and filetype ~= "" then
+                icon, hl, is_default = mini_icons.get("filetype", filetype)
+                if not is_default then
+                    return icon, hl
+                end
+            end
+
+            return nil, nil
+        end
+
+        --- Returns { type, text, icon, icon_hl } for the current buffer
+        local function get_file_info()
+            local bufname = vim.fn.expand("%")
+            local filetype = vim.bo.filetype
+
+            if vim.bo.buftype == "quickfix" then
+                local icon, hl = get_icon(nil, "qf")
+                local text = vim.fn.win_gettype() == "loclist" and "Location List" or "Quickfix List"
+                return { type = "special", text = text, icon = icon, icon_hl = hl }
+            end
+
+            if filetype == "checkhealth" or bufname:match("^health://") or bufname:match("checkhealth") then
+                local icon, hl = get_icon(nil, "checkhealth")
+                return { type = "special", text = "Health", icon = icon, icon_hl = hl }
+            end
+
+            local filename = vim.fn.expand("%:t")
+            if filename == "" then
+                filename = "[No Name]"
+            end
+            local icon, hl = get_icon(filename, filetype)
+            return { type = "regular", text = filename, icon = icon, icon_hl = hl }
+        end
+
+        local FilePath = {
+            condition = function()
+                local filetype = vim.bo.filetype
+
+                local win_config = vim.api.nvim_win_get_config(0)
+                if win_config.relative ~= "" then
+                    return false
+                end
+
+                if filetype == "oil" then
+                    return false
+                end
+
+                return true
+            end,
+
+            -- Icon
+            {
+                provider = function()
+                    local info = get_file_info()
+                    return info.icon and (info.icon .. " ") or ""
+                end,
+                hl = function()
+                    local info = get_file_info()
+                    return info.icon_hl
+                end,
+            },
+
+            -- Filename / special text
+            {
+                provider = function()
+                    return get_file_info().text
+                end,
+                hl = function()
+                    local info = get_file_info()
+                    if info.type == "special" then
+                        return "HeirlinePathHealth"
+                    end
+                    return vim.bo.modified and "HeirlinePathModified" or "HeirlinePathFile"
+                end,
+            },
+
+            -- Lock icon for non-modifiable buffers
+            {
+                provider = function()
+                    local info = get_file_info()
+                    if info.type == "regular" and not vim.bo.modifiable then
+                        return " "
+                    end
+                    return ""
+                end,
+                hl = "HeirlinePathLock",
+            },
+        }
+
         local FileEncoding = {
             condition = function()
                 local win_config = vim.api.nvim_win_get_config(0)
@@ -34,12 +137,10 @@ return {
                 local buftype = vim.bo.buftype
                 local filetype = vim.bo.filetype
 
-                -- Hide for Oil buffers
                 if filetype == "oil" then
                     return false
                 end
 
-                -- Show for quickfix even though bufname is empty
                 if buftype == "quickfix" then
                     return true
                 end
@@ -59,12 +160,10 @@ return {
                 local buftype = vim.bo.buftype
                 local filetype = vim.bo.filetype
 
-                -- Hide for Oil buffers
                 if filetype == "oil" then
                     return false
                 end
 
-                -- Show for quickfix even though bufname is empty
                 if buftype == "quickfix" then
                     return true
                 end
@@ -264,7 +363,6 @@ return {
 
         local Diagnostics = {
             condition = function()
-                -- Check if diagnostics are disabled
                 if not vim.diagnostic.is_enabled() then
                     return false
                 end
@@ -337,12 +435,10 @@ return {
                 local buftype = vim.bo.buftype
                 local filetype = vim.bo.filetype
 
-                -- Hide for Oil buffers
                 if filetype == "oil" then
                     return false
                 end
 
-                -- Show for quickfix even though bufname is empty
                 if buftype == "quickfix" then
                     return true
                 end
@@ -361,12 +457,10 @@ return {
                 local buftype = vim.bo.buftype
                 local filetype = vim.bo.filetype
 
-                -- Hide for Oil buffers
                 if filetype == "oil" then
                     return false
                 end
 
-                -- Show for quickfix even though bufname is empty
                 if buftype == "quickfix" then
                     return true
                 end
@@ -389,7 +483,7 @@ return {
             { provider = " " },
             with_trailing_space(GitBranch),
             with_trailing_space(GitDiffs),
-            with_trailing_space(path.component),
+            with_trailing_space(FilePath),
             with_trailing_space(Diagnostics),
             { provider = "%=" },
             with_leading_space(ActiveTooling),
