@@ -10,13 +10,13 @@ Personal dotfiles and configuration management for my linux machines
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Lua                             58            626            588           4034
+Lua                             57            399            448           2805
 TOML                             7            110            322            333
 JSON                             3              0              0            249
 Markdown                         2              9              4            149
 Bourne Shell                     1              0              0             22
 -------------------------------------------------------------------------------
-SUM:                            71            745            914           4787
+SUM:                            70            518            774           3558
 -------------------------------------------------------------------------------
 ```
 <!-- CODE_STATISTICS_END -->
@@ -81,7 +81,6 @@ dotfiles
 │   │   │       ├── init.lua
 │   │   │       ├── runner.lua
 │   │   │       ├── status_column.lua
-│   │   │       ├── winbar_breadcrumbs.lua
 │   │   │       └── window_swapper.lua
 │   │   └── plugins
 │   │       ├── coding
@@ -135,6 +134,6 @@ dotfiles
 │       └── astrodark.kdl
 └── zsh
 
-31 directories, 77 files
+31 directories, 76 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
