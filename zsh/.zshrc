@@ -4,6 +4,9 @@
 
 [[ $- != *i* ]] && return # Exit early if not running interactively
 
+# Automatically start zellij
+eval "$(zellij setup --generate-auto-start zsh)"
+
 # Set default mask
 umask 022
 
