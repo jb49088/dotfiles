@@ -155,15 +155,15 @@ setopt HIST_IGNORE_SPACE # Don't record commands starting with space
 
 # ===================================== GIT ======================================
 
-gitpush() {
-    local dir="$1"
-    local files="$2"
-    local msg="$3"
-
-    (cd "$dir" && git add "$files" && git commit -m "$msg" && git push)
-}
-
 if [[ $HOST == "wsl" ]]; then
+    gitpush() {
+        local dir="$1"
+        local files="$2"
+        local msg="$3"
+
+        (cd "$dir" && git add "$files" && git commit -m "$msg" && git push)
+    }
+
     giteducational() { gitpush "$HOME/vault/educational" "." "update $(date +%Y-%m-%d)"; }
     gitpentesting() { gitpush "$HOME/vault/pentesting" "." "update $(date +%Y-%m-%d)"; }
     gitspellfiles() { gitpush "$HOME/.config/nvim" "spell" "chore: update spellfiles"; }
