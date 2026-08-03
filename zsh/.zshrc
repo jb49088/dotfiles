@@ -75,6 +75,9 @@ fi
 # General
 alias grep='grep --color=auto'
 alias weather='curl wttr.in'
+# This alias is meant to be used at the end of pipelines where grep or some other
+# filter/transformation tool is the last command and the user still wants no line wrapping
+alias nowrap='cut --characters 1-$COLUMNS'
 
 # ls
 alias ll='ls -lah --group-directories-first'
